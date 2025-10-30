@@ -91,10 +91,11 @@ spec:
     spec:
       containers:
         - name: agents
-          image: docker.io/your-docker-repo/predator-analytics/predator/agents:auto-1761850959
+          image: docker.io/your-docker-repo/predator-analytics/predator/agents:quicktest-20251030
           imagePullPolicy: IfNotPresent
           args: ["--mode=worker"]
-          resources: {}
+          resources:
+            {}
 ---
 # Source: predator-umbrella/charts/api/templates/deployment.yaml
 apiVersion: apps/v1
@@ -119,7 +120,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: docker.io/your-docker-repo/predator-analytics/predator/api:auto-1761850959
+          image: docker.io/your-docker-repo/predator-analytics/predator/api:quicktest-20251030
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
@@ -136,7 +137,8 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 20
-          resources: {}
+          resources:
+            {}
 ---
 # Source: predator-umbrella/charts/celery/templates/deployment.yaml
 apiVersion: apps/v1
@@ -161,10 +163,11 @@ spec:
     spec:
       containers:
         - name: celery
-          image: docker.io/your-docker-repo/predator-analytics/predator/celery:auto-1761850959
+          image: docker.io/your-docker-repo/predator-analytics/predator/celery:quicktest-20251030
           imagePullPolicy: IfNotPresent
           env:
-          resources: {}
+          resources:
+            {}
 ---
 # Source: predator-umbrella/charts/frontend/templates/deployment.yaml
 apiVersion: apps/v1
@@ -189,7 +192,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: docker.io/your-docker-repo/predator-analytics/predator/frontend:auto-1761850959
+          image: docker.io/your-docker-repo/predator-analytics/predator/frontend:quicktest-20251030
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
@@ -206,7 +209,8 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 20
-          resources: {}
+          resources:
+            {}
 ---
 # Source: predator-umbrella/charts/model-router/templates/deployment.yaml
 apiVersion: apps/v1
@@ -231,7 +235,7 @@ spec:
     spec:
       containers:
         - name: model-router
-          image: docker.io/your-docker-repo/predator-analytics/predator/model-router:auto-1761850959
+          image: docker.io/your-docker-repo/predator-analytics/predator/model-router:quicktest-20251030
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -248,7 +252,8 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 20
-          resources: {}
+          resources:
+            {}
 ---
 # Source: predator-umbrella/templates/ingress.yaml
 apiVersion: networking.k8s.io/v1

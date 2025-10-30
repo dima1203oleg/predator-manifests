@@ -49,7 +49,7 @@ automountServiceAccountToken: true
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  labels:
+  labels:    
     helm.sh/chart: kube-state-metrics-5.10.1
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: metrics
@@ -103,7 +103,8 @@ metadata:
     app.kubernetes.io/part-of: prometheus
   name: predator-analytics-prometheus-server
   namespace: default
-  annotations: {}
+  annotations:
+    {}
 ---
 # Source: predator-analytics/charts/redis/templates/serviceaccount.yaml
 apiVersion: v1
@@ -214,14 +215,14 @@ metadata:
 data:
   opensearch.yml: |
     cluster.name: opensearch-cluster
-
+    
     # Bind to all interfaces because we don't know what IP address Docker will assign to us.
     network.host: 0.0.0.0
-
+    
     # Setting network.host to a non-loopback address enables the annoying bootstrap checks. "Single-node" mode disables them again.
     # Implicitly done if ".singleNode" is set to "true".
     # discovery.type: single-node
-
+    
     # Start OpenSearch Security Demo Configuration
     # WARNING: revise all the lines below before you go into production
     # plugins:
@@ -941,7 +942,7 @@ rules: []
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  labels:
+  labels:    
     helm.sh/chart: kube-state-metrics-5.10.1
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: metrics
@@ -951,118 +952,146 @@ metadata:
     app.kubernetes.io/version: "2.9.2"
   name: predator-analytics-kube-state-metrics
 rules:
-  - apiGroups: ["certificates.k8s.io"]
-    resources:
-      - certificatesigningrequests
-    verbs: ["list", "watch"]
-  - apiGroups: [""]
-    resources:
-      - configmaps
-    verbs: ["list", "watch"]
-  - apiGroups: ["batch"]
-    resources:
-      - cronjobs
-    verbs: ["list", "watch"]
-  - apiGroups: ["extensions", "apps"]
-    resources:
-      - daemonsets
-    verbs: ["list", "watch"]
-  - apiGroups: ["extensions", "apps"]
-    resources:
-      - deployments
-    verbs: ["list", "watch"]
-  - apiGroups: [""]
-    resources:
-      - endpoints
-    verbs: ["list", "watch"]
-  - apiGroups: ["autoscaling"]
-    resources:
-      - horizontalpodautoscalers
-    verbs: ["list", "watch"]
-  - apiGroups: ["extensions", "networking.k8s.io"]
-    resources:
-      - ingresses
-    verbs: ["list", "watch"]
-  - apiGroups: ["batch"]
-    resources:
-      - jobs
-    verbs: ["list", "watch"]
-  - apiGroups: ["coordination.k8s.io"]
-    resources:
-      - leases
-    verbs: ["list", "watch"]
-  - apiGroups: [""]
-    resources:
-      - limitranges
-    verbs: ["list", "watch"]
-  - apiGroups: ["admissionregistration.k8s.io"]
-    resources:
-      - mutatingwebhookconfigurations
-    verbs: ["list", "watch"]
-  - apiGroups: [""]
-    resources:
-      - namespaces
-    verbs: ["list", "watch"]
-  - apiGroups: ["networking.k8s.io"]
-    resources:
-      - networkpolicies
-    verbs: ["list", "watch"]
-  - apiGroups: [""]
-    resources:
-      - nodes
-    verbs: ["list", "watch"]
-  - apiGroups: [""]
-    resources:
-      - persistentvolumeclaims
-    verbs: ["list", "watch"]
-  - apiGroups: [""]
-    resources:
-      - persistentvolumes
-    verbs: ["list", "watch"]
-  - apiGroups: ["policy"]
-    resources:
-      - poddisruptionbudgets
-    verbs: ["list", "watch"]
-  - apiGroups: [""]
-    resources:
-      - pods
-    verbs: ["list", "watch"]
-  - apiGroups: ["extensions", "apps"]
-    resources:
-      - replicasets
-    verbs: ["list", "watch"]
-  - apiGroups: [""]
-    resources:
-      - replicationcontrollers
-    verbs: ["list", "watch"]
-  - apiGroups: [""]
-    resources:
-      - resourcequotas
-    verbs: ["list", "watch"]
-  - apiGroups: [""]
-    resources:
-      - secrets
-    verbs: ["list", "watch"]
-  - apiGroups: [""]
-    resources:
-      - services
-    verbs: ["list", "watch"]
-  - apiGroups: ["apps"]
-    resources:
-      - statefulsets
-    verbs: ["list", "watch"]
-  - apiGroups: ["storage.k8s.io"]
-    resources:
-      - storageclasses
-    verbs: ["list", "watch"]
-  - apiGroups: ["admissionregistration.k8s.io"]
-    resources:
-      - validatingwebhookconfigurations
-    verbs: ["list", "watch"]
-  - apiGroups: ["storage.k8s.io"]
-    resources:
-      - volumeattachments
-    verbs: ["list", "watch"]
+
+- apiGroups: ["certificates.k8s.io"]
+  resources:
+  - certificatesigningrequests
+  verbs: ["list", "watch"]
+
+- apiGroups: [""]
+  resources:
+  - configmaps
+  verbs: ["list", "watch"]
+
+- apiGroups: ["batch"]
+  resources:
+  - cronjobs
+  verbs: ["list", "watch"]
+
+- apiGroups: ["extensions", "apps"]
+  resources:
+  - daemonsets
+  verbs: ["list", "watch"]
+
+- apiGroups: ["extensions", "apps"]
+  resources:
+  - deployments
+  verbs: ["list", "watch"]
+
+- apiGroups: [""]
+  resources:
+  - endpoints
+  verbs: ["list", "watch"]
+
+- apiGroups: ["autoscaling"]
+  resources:
+  - horizontalpodautoscalers
+  verbs: ["list", "watch"]
+
+- apiGroups: ["extensions", "networking.k8s.io"]
+  resources:
+  - ingresses
+  verbs: ["list", "watch"]
+
+- apiGroups: ["batch"]
+  resources:
+  - jobs
+  verbs: ["list", "watch"]
+
+- apiGroups: ["coordination.k8s.io"]
+  resources:
+  - leases
+  verbs: ["list", "watch"]
+
+- apiGroups: [""]
+  resources:
+  - limitranges
+  verbs: ["list", "watch"]
+
+- apiGroups: ["admissionregistration.k8s.io"]
+  resources:
+    - mutatingwebhookconfigurations
+  verbs: ["list", "watch"]
+
+- apiGroups: [""]
+  resources:
+  - namespaces
+  verbs: ["list", "watch"]
+
+- apiGroups: ["networking.k8s.io"]
+  resources:
+  - networkpolicies
+  verbs: ["list", "watch"]
+
+- apiGroups: [""]
+  resources:
+  - nodes
+  verbs: ["list", "watch"]
+
+- apiGroups: [""]
+  resources:
+  - persistentvolumeclaims
+  verbs: ["list", "watch"]
+
+- apiGroups: [""]
+  resources:
+  - persistentvolumes
+  verbs: ["list", "watch"]
+
+- apiGroups: ["policy"]
+  resources:
+    - poddisruptionbudgets
+  verbs: ["list", "watch"]
+
+- apiGroups: [""]
+  resources:
+  - pods
+  verbs: ["list", "watch"]
+
+- apiGroups: ["extensions", "apps"]
+  resources:
+  - replicasets
+  verbs: ["list", "watch"]
+
+- apiGroups: [""]
+  resources:
+  - replicationcontrollers
+  verbs: ["list", "watch"]
+
+- apiGroups: [""]
+  resources:
+  - resourcequotas
+  verbs: ["list", "watch"]
+
+- apiGroups: [""]
+  resources:
+  - secrets
+  verbs: ["list", "watch"]
+
+- apiGroups: [""]
+  resources:
+  - services
+  verbs: ["list", "watch"]
+
+- apiGroups: ["apps"]
+  resources:
+  - statefulsets
+  verbs: ["list", "watch"]
+
+- apiGroups: ["storage.k8s.io"]
+  resources:
+    - storageclasses
+  verbs: ["list", "watch"]
+
+- apiGroups: ["admissionregistration.k8s.io"]
+  resources:
+    - validatingwebhookconfigurations
+  verbs: ["list", "watch"]
+
+- apiGroups: ["storage.k8s.io"]
+  resources:
+    - volumeattachments
+  verbs: ["list", "watch"]
 ---
 # Source: predator-analytics/charts/prometheus/templates/clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -1132,7 +1161,7 @@ roleRef:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  labels:
+  labels:    
     helm.sh/chart: kube-state-metrics-5.10.1
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: metrics
@@ -1146,9 +1175,9 @@ roleRef:
   kind: ClusterRole
   name: predator-analytics-kube-state-metrics
 subjects:
-  - kind: ServiceAccount
-    name: predator-analytics-kube-state-metrics
-    namespace: default
+- kind: ServiceAccount
+  name: predator-analytics-kube-state-metrics
+  namespace: default
 ---
 # Source: predator-analytics/charts/prometheus/templates/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -1203,9 +1232,9 @@ roleRef:
   kind: Role
   name: predator-analytics-grafana
 subjects:
-  - kind: ServiceAccount
-    name: predator-analytics-grafana
-    namespace: default
+- kind: ServiceAccount
+  name: predator-analytics-grafana
+  namespace: default
 ---
 # Source: predator-analytics/charts/grafana/templates/service.yaml
 apiVersion: v1
@@ -1242,22 +1271,23 @@ metadata:
     app.kubernetes.io/version: "2.19.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: predator-opensearch-master
-  annotations: {}
+  annotations:
+    {}
 spec:
   type: ClusterIP
   selector:
     app.kubernetes.io/name: opensearch
     app.kubernetes.io/instance: predator-analytics
   ports:
-    - name: http
-      protocol: TCP
-      port: 9200
-    - name: transport
-      protocol: TCP
-      port: 9300
-    - name: metrics
-      protocol: TCP
-      port: 9600
+  - name: http
+    protocol: TCP
+    port: 9200
+  - name: transport
+    protocol: TCP
+    port: 9300
+  - name: metrics
+    protocol: TCP
+    port: 9600
 ---
 # Source: predator-analytics/charts/opensearch/templates/service.yaml
 kind: Service
@@ -1281,12 +1311,12 @@ spec:
     app.kubernetes.io/name: opensearch
     app.kubernetes.io/instance: predator-analytics
   ports:
-    - name: http
-      port: 9200
-    - name: transport
-      port: 9300
-    - name: metrics
-      port: 9600
+  - name: http
+    port: 9200
+  - name: transport
+    port: 9300
+  - name: metrics
+    port: 9600
 ---
 # Source: predator-analytics/charts/postgresql/templates/primary/svc-headless.yaml
 apiVersion: v1
@@ -1401,7 +1431,7 @@ kind: Service
 metadata:
   name: predator-analytics-kube-state-metrics
   namespace: default
-  labels:
+  labels:    
     helm.sh/chart: kube-state-metrics-5.10.1
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: metrics
@@ -1414,11 +1444,12 @@ metadata:
 spec:
   type: "ClusterIP"
   ports:
-    - name: "http"
-      protocol: TCP
-      port: 8080
-      targetPort: 8080
-  selector:
+  - name: "http"
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
+  
+  selector:    
     app.kubernetes.io/name: kube-state-metrics
     app.kubernetes.io/instance: predator-analytics
 ---
@@ -1514,6 +1545,7 @@ metadata:
     app.kubernetes.io/version: 7.0.12
     helm.sh/chart: redis-17.17.1
   annotations:
+    
 spec:
   type: ClusterIP
   clusterIP: None
@@ -1624,7 +1656,7 @@ spec:
       serviceAccountName: predator-analytics-prometheus-node-exporter
       containers:
         - name: node-exporter
-          image: quay.io/prometheus/node-exporter:quicktest-20251030
+          image: quay.io/prometheus/node-exporter:v1.6.0
           imagePullPolicy: IfNotPresent
           args:
             - --path.procfs=/host/proc
@@ -1667,7 +1699,7 @@ spec:
           volumeMounts:
             - name: proc
               mountPath: /host/proc
-              readOnly: true
+              readOnly:  true
             - name: sys
               mountPath: /host/sys
               readOnly: true
@@ -1726,6 +1758,7 @@ spec:
         checksum/secret: c1dba7cafe64cb5a8353e330cb2fbf6d767bc0afe69b81b41e1bfee761c6c98a
         kubectl.kubernetes.io/default-container: grafana
     spec:
+      
       serviceAccountName: predator-analytics-grafana
       automountServiceAccountToken: true
       securityContext:
@@ -1736,13 +1769,13 @@ spec:
       enableServiceLinks: true
       containers:
         - name: grafana
-          image: "docker.io/grafana/grafana:quicktest-20251030"
+          image: "docker.io/grafana/grafana:10.1.5"
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
               drop:
-                - ALL
+              - ALL
             seccompProfile:
               type: RuntimeDefault
           volumeMounts:
@@ -1808,7 +1841,7 @@ kind: Deployment
 metadata:
   name: predator-analytics-kube-state-metrics
   namespace: default
-  labels:
+  labels:    
     helm.sh/chart: kube-state-metrics-5.10.1
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: metrics
@@ -1818,13 +1851,13 @@ metadata:
     app.kubernetes.io/version: "2.9.2"
 spec:
   selector:
-    matchLabels:
+    matchLabels:      
       app.kubernetes.io/name: kube-state-metrics
       app.kubernetes.io/instance: predator-analytics
   replicas: 1
   template:
     metadata:
-      labels:
+      labels:        
         helm.sh/chart: kube-state-metrics-5.10.1
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/component: metrics
@@ -1843,32 +1876,32 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       containers:
-        - name: kube-state-metrics
-          args:
-            - --port=8080
-            - --resources=certificatesigningrequests,configmaps,cronjobs,daemonsets,deployments,endpoints,horizontalpodautoscalers,ingresses,jobs,leases,limitranges,mutatingwebhookconfigurations,namespaces,networkpolicies,nodes,persistentvolumeclaims,persistentvolumes,poddisruptionbudgets,pods,replicasets,replicationcontrollers,resourcequotas,secrets,services,statefulsets,storageclasses,validatingwebhookconfigurations,volumeattachments
-          imagePullPolicy: IfNotPresent
-          image: registry.k8s.io/kube-state-metrics/kube-state-metrics:quicktest-20251030
-          ports:
-            - containerPort: 8080
-              name: "http"
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-            initialDelaySeconds: 5
-            timeoutSeconds: 5
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8080
-            initialDelaySeconds: 5
-            timeoutSeconds: 5
-          securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
+      - name: kube-state-metrics
+        args:
+        - --port=8080
+        - --resources=certificatesigningrequests,configmaps,cronjobs,daemonsets,deployments,endpoints,horizontalpodautoscalers,ingresses,jobs,leases,limitranges,mutatingwebhookconfigurations,namespaces,networkpolicies,nodes,persistentvolumeclaims,persistentvolumes,poddisruptionbudgets,pods,replicasets,replicationcontrollers,resourcequotas,secrets,services,statefulsets,storageclasses,validatingwebhookconfigurations,volumeattachments
+        imagePullPolicy: IfNotPresent
+        image: registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.9.2
+        ports:
+        - containerPort: 8080
+          name: "http"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
 ---
 # Source: predator-analytics/charts/prometheus/charts/prometheus-pushgateway/templates/deployment.yaml
 apiVersion: apps/v1
@@ -1902,7 +1935,7 @@ spec:
       serviceAccountName: predator-analytics-prometheus-pushgateway
       containers:
         - name: pushgateway
-          image: "quay.io/prometheus/pushgateway:quicktest-20251030"
+          image: "quay.io/prometheus/pushgateway:v1.6.0"
           imagePullPolicy: IfNotPresent
           ports:
             - name: metrics
@@ -1972,18 +2005,20 @@ spec:
       serviceAccountName: predator-analytics-prometheus-server
       containers:
         - name: prometheus-server-configmap-reload
-          image: "quay.io/prometheus-operator/prometheus-config-reloader:quicktest-20251030"
+          image: "quay.io/prometheus-operator/prometheus-config-reloader:v0.67.0"
           imagePullPolicy: "IfNotPresent"
           args:
             - --watched-dir=/etc/config
             - --reload-url=http://127.0.0.1:9090/-/reload
-          resources: {}
+          resources:
+            {}
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config
               readOnly: true
+
         - name: prometheus-server
-          image: "quay.io/prometheus/prometheus:quicktest-20251030"
+          image: "quay.io/prometheus/prometheus:v2.46.0"
           imagePullPolicy: "IfNotPresent"
           args:
             - --storage.tsdb.retention.time=15d
@@ -2014,7 +2049,8 @@ spec:
             timeoutSeconds: 10
             failureThreshold: 3
             successThreshold: 1
-          resources: {}
+          resources:
+            {}
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config
@@ -2063,7 +2099,7 @@ spec:
       serviceAccountName: predator-analytics-sa
       containers:
         - name: reasoning-agent
-          image: "docker.io/predator-analytics/backend:auto-1761850959"
+          image: "docker.io/predator-analytics/backend:1.0.0"
           command: ["python", "-m", "agents.reasoning_agent"]
           env:
             - name: AGENT_TYPE
@@ -2085,7 +2121,8 @@ spec:
                 secretKeyRef:
                   name: predator-analytics-predator-analytics-redis
                   key: redis-password
-          resources: null
+          resources:
+            null
 ---
 # Source: predator-analytics/templates/agents-deployment.yaml
 apiVersion: apps/v1
@@ -2114,7 +2151,7 @@ spec:
       serviceAccountName: predator-analytics-sa
       containers:
         - name: code-agent
-          image: "docker.io/predator-analytics/backend:auto-1761850959"
+          image: "docker.io/predator-analytics/backend:1.0.0"
           command: ["python", "-m", "agents.code_agent"]
           env:
             - name: AGENT_TYPE
@@ -2134,7 +2171,8 @@ spec:
                 secretKeyRef:
                   name: predator-analytics-predator-analytics-redis
                   key: redis-password
-          resources: null
+          resources:
+            null
 ---
 # Source: predator-analytics/templates/agents-deployment.yaml
 apiVersion: apps/v1
@@ -2163,7 +2201,7 @@ spec:
       serviceAccountName: predator-analytics-sa
       containers:
         - name: quick-agent
-          image: "docker.io/predator-analytics/backend:auto-1761850959"
+          image: "docker.io/predator-analytics/backend:1.0.0"
           command: ["python", "-m", "agents.quick_agent"]
           env:
             - name: AGENT_TYPE
@@ -2183,7 +2221,8 @@ spec:
                 secretKeyRef:
                   name: predator-analytics-predator-analytics-redis
                   key: redis-password
-          resources: null
+          resources:
+            null
 ---
 # Source: predator-analytics/templates/backend-deployment.yaml
 apiVersion: apps/v1
@@ -2211,11 +2250,13 @@ spec:
         app.kubernetes.io/component: backend
     spec:
       serviceAccountName: predator-analytics-sa
-      securityContext: null
+      securityContext:
+        null
       containers:
         - name: backend
-          securityContext: null
-          image: "docker.io/predator-analytics/backend:auto-1761850959"
+          securityContext:
+            null
+          image: "docker.io/predator-analytics/backend:1.0.0"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -2309,11 +2350,13 @@ spec:
         app.kubernetes.io/component: frontend
     spec:
       serviceAccountName: predator-analytics-sa
-      securityContext: null
+      securityContext:
+        null
       containers:
         - name: frontend
-          securityContext: null
-          image: "docker.io/predator-analytics/frontend:auto-1761850959"
+          securityContext:
+            null
+          image: "docker.io/predator-analytics/frontend:1.0.0"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -2375,14 +2418,14 @@ spec:
   updateStrategy:
     type: RollingUpdate
   volumeClaimTemplates:
-    - metadata:
-        name: predator-opensearch-master
-      spec:
-        accessModes:
-          - "ReadWriteOnce"
-        resources:
-          requests:
-            storage: "200Gi"
+  - metadata:
+      name: predator-opensearch-master
+    spec:
+      accessModes:
+      - "ReadWriteOnce"
+      resources:
+        requests:
+          storage: "200Gi"
   template:
     metadata:
       name: "predator-opensearch-master"
@@ -2403,122 +2446,125 @@ spec:
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              podAffinityTerm:
-                topologyKey: kubernetes.io/hostname
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/instance
-                      operator: In
-                      values:
-                        - predator-analytics
-                    - key: app.kubernetes.io/name
-                      operator: In
-                      values:
-                        - opensearch
+          - weight: 1
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchExpressions:
+                - key: app.kubernetes.io/instance
+                  operator: In
+                  values:
+                  - predator-analytics
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                  - opensearch
       terminationGracePeriodSeconds: 120
       volumes:
-        - name: config
-          configMap:
-            name: predator-opensearch-master-config
-        - emptyDir: {}
-          name: config-emptydir
+      - name: config
+        configMap:
+          name: predator-opensearch-master-config
+      - emptyDir: {}
+        name: config-emptydir
       enableServiceLinks: true
       initContainers:
-        - name: fsgroup-volume
-          image: "busybox:quicktest-20251030"
-          imagePullPolicy: "IfNotPresent"
-          command: ['sh', '-c']
-          args:
-            - 'chown -R 1000:1000 /usr/share/opensearch/data'
-          securityContext:
-            runAsUser: 0
-          resources: {}
-          volumeMounts:
-            - name: "predator-opensearch-master"
-              mountPath: /usr/share/opensearch/data
-        - name: configfile
-          image: "opensearchproject/opensearch:quicktest-20251030"
-          imagePullPolicy: "IfNotPresent"
-          command:
-            - sh
-            - -c
-            - |
-              #!/usr/bin/env bash
-              cp -r /tmp/configfolder/*  /tmp/config/
-          securityContext:
-            capabilities:
-              drop:
-                - ALL
-            runAsNonRoot: true
-            runAsUser: 1000
-          resources: {}
-          volumeMounts:
-            - mountPath: /tmp/config/
-              name: config-emptydir
-            - name: config
-              mountPath: /tmp/configfolder/opensearch.yml
-              subPath: opensearch.yml
+      - name: fsgroup-volume
+        image: "busybox:latest"
+        imagePullPolicy: "IfNotPresent"
+        command: ['sh', '-c']
+        args:
+          - 'chown -R 1000:1000 /usr/share/opensearch/data'
+        securityContext:
+          runAsUser: 0
+        resources:
+          {}
+        volumeMounts:
+          - name: "predator-opensearch-master"
+            mountPath: /usr/share/opensearch/data
+      - name: configfile
+        image: "opensearchproject/opensearch:2.19.3"
+        imagePullPolicy: "IfNotPresent"
+        command:
+        - sh
+        - -c
+        - |
+          #!/usr/bin/env bash
+          cp -r /tmp/configfolder/*  /tmp/config/
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          runAsUser: 1000
+        resources:
+          {}
+        volumeMounts:
+          - mountPath: /tmp/config/
+            name: config-emptydir
+          - name: config
+            mountPath: /tmp/configfolder/opensearch.yml
+            subPath: opensearch.yml
       containers:
-        - name: "opensearch"
-          securityContext:
-            capabilities:
-              drop:
-                - ALL
-            runAsNonRoot: true
-            runAsUser: 1000
-          image: "opensearchproject/opensearch:quicktest-20251030"
-          imagePullPolicy: "IfNotPresent"
-          readinessProbe:
-            failureThreshold: 3
-            periodSeconds: 5
-            tcpSocket:
-              port: 9200
-            timeoutSeconds: 3
-          startupProbe:
-            failureThreshold: 30
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            tcpSocket:
-              port: 9200
-            timeoutSeconds: 3
-          ports:
-            - name: http
-              containerPort: 9200
-            - name: transport
-              containerPort: 9300
-            - name: metrics
-              containerPort: 9600
-          resources:
-            limits:
-              cpu: 2000m
-              memory: 4Gi
-            requests:
-              cpu: 1000m
-              memory: 2Gi
-          env:
-            - name: node.name
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
-            - name: cluster.initial_master_nodes
-              value: "predator-opensearch-master-0,predator-opensearch-master-1,predator-opensearch-master-2,"
-            - name: discovery.seed_hosts
-              value: "predator-opensearch-headless"
-            - name: cluster.name
-              value: "predator-opensearch"
-            - name: network.host
-              value: "0.0.0.0"
-            - name: OPENSEARCH_JAVA_OPTS
-              value: "-Xmx512M -Xms512M"
-            - name: node.roles
-              value: "master,ingest,data,remote_cluster_client,"
-          volumeMounts:
-            - name: "predator-opensearch-master"
-              mountPath: /usr/share/opensearch/data
-            - name: config-emptydir
-              mountPath: /usr/share/opensearch/config/opensearch.yml
-              subPath: opensearch.yml
+      - name: "opensearch"
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          runAsUser: 1000
+
+        image: "opensearchproject/opensearch:2.19.3"
+        imagePullPolicy: "IfNotPresent"
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 5
+          tcpSocket:
+            port: 9200
+          timeoutSeconds: 3
+        startupProbe:
+          failureThreshold: 30
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          tcpSocket:
+            port: 9200
+          timeoutSeconds: 3
+        ports:
+        - name: http
+          containerPort: 9200
+        - name: transport
+          containerPort: 9300
+        - name: metrics
+          containerPort: 9600
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 4Gi
+          requests:
+            cpu: 1000m
+            memory: 2Gi
+        env:
+        - name: node.name
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: cluster.initial_master_nodes
+          value: "predator-opensearch-master-0,predator-opensearch-master-1,predator-opensearch-master-2,"
+        - name: discovery.seed_hosts
+          value: "predator-opensearch-headless"
+        - name: cluster.name
+          value: "predator-opensearch"
+        - name: network.host
+          value: "0.0.0.0"
+        - name: OPENSEARCH_JAVA_OPTS
+          value: "-Xmx512M -Xms512M"
+        - name: node.roles
+          value: "master,ingest,data,remote_cluster_client,"
+        volumeMounts:
+        - name: "predator-opensearch-master"
+          mountPath: /usr/share/opensearch/data
+        - name: config-emptydir
+          mountPath: /usr/share/opensearch/config/opensearch.yml
+          subPath: opensearch.yml
 ---
 # Source: predator-analytics/charts/postgresql/templates/primary/statefulset.yaml
 apiVersion: apps/v1
@@ -2556,8 +2602,10 @@ spec:
         app.kubernetes.io/component: primary
     spec:
       serviceAccountName: default
+      
       affinity:
         podAffinity:
+          
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
             - podAffinityTerm:
@@ -2569,19 +2617,20 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 1
         nodeAffinity:
+          
       securityContext:
         fsGroup: 1001
       hostNetwork: false
       hostIPC: false
       containers:
         - name: postgresql
-          image: docker.io/bitnami/postgresql:quicktest-20251030
+          image: docker.io/bitnami/postgresql:15.4.0-debian-11-r45
           imagePullPolicy: "IfNotPresent"
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
               drop:
-                - ALL
+              - ALL
             runAsGroup: 0
             runAsNonRoot: true
             runAsUser: 1001
@@ -2730,7 +2779,7 @@ spec:
             runAsGroup: 65534
             runAsNonRoot: true
             runAsUser: 65534
-          image: "quay.io/prometheus/alertmanager:quicktest-20251030"
+          image: "quay.io/prometheus/alertmanager:v0.25.0"
           imagePullPolicy: IfNotPresent
           env:
             - name: POD_IP
@@ -2753,7 +2802,8 @@ spec:
             httpGet:
               path: /
               port: http
-          resources: {}
+          resources:
+            {}
           volumeMounts:
             - name: config
               mountPath: /etc/alertmanager
@@ -2811,12 +2861,14 @@ spec:
         checksum/scripts: 262404da077035f21dca4eb833119632e4ebfab3baa72148c252c6f52829c0af
         checksum/secret: 274bc98c8c7f26407d499724c7795ff65872fcc6ef1bb31b65ae257fd260f519
     spec:
+      
       securityContext:
         fsGroup: 1001
       serviceAccountName: predator-analytics-redis
       automountServiceAccountToken: true
       affinity:
         podAffinity:
+          
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
             - podAffinityTerm:
@@ -2828,17 +2880,18 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 1
         nodeAffinity:
+          
       enableServiceLinks: true
       terminationGracePeriodSeconds: 30
       containers:
         - name: redis
-          image: docker.io/bitnami/redis:quicktest-20251030
+          image: docker.io/bitnami/redis:7.0.12-debian-11-r34
           imagePullPolicy: "IfNotPresent"
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
               drop:
-                - ALL
+              - ALL
             runAsGroup: 0
             runAsNonRoot: true
             runAsUser: 1001
@@ -2981,12 +3034,14 @@ spec:
         checksum/scripts: 262404da077035f21dca4eb833119632e4ebfab3baa72148c252c6f52829c0af
         checksum/secret: e09cb02864926b0ac20bcc05d68a7fcb7ce1f7bfef85a8badee0aebe61d949d8
     spec:
+      
       securityContext:
         fsGroup: 1001
       serviceAccountName: predator-analytics-redis
       automountServiceAccountToken: true
       affinity:
         podAffinity:
+          
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
             - podAffinityTerm:
@@ -2998,17 +3053,18 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 1
         nodeAffinity:
+          
       enableServiceLinks: true
       terminationGracePeriodSeconds: 30
       containers:
         - name: redis
-          image: docker.io/bitnami/redis:quicktest-20251030
+          image: docker.io/bitnami/redis:7.0.12-debian-11-r34
           imagePullPolicy: "IfNotPresent"
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
               drop:
-                - ALL
+              - ALL
             runAsGroup: 0
             runAsNonRoot: true
             runAsUser: 1001
@@ -3180,7 +3236,7 @@ spec:
   serviceAccountName: predator-analytics-grafana-test
   containers:
     - name: predator-analytics-test
-      image: "docker.io/bats/bats:quicktest-20251030"
+      image: "docker.io/bats/bats:v1.4.1"
       imagePullPolicy: "IfNotPresent"
       command: ["/opt/bats/bin/bats", "-t", "/tests/run.sh"]
       volumeMounts:
