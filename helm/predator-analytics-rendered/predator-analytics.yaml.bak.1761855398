@@ -2063,7 +2063,7 @@ spec:
       serviceAccountName: predator-analytics-sa
       containers:
         - name: reasoning-agent
-          image: "docker.io/predator-analytics/backend:auto-1761855398"
+          image: "docker.io/predator-analytics/backend:auto-1761855083"
           command: ["python", "-m", "agents.reasoning_agent"]
           env:
             - name: AGENT_TYPE
@@ -2114,7 +2114,7 @@ spec:
       serviceAccountName: predator-analytics-sa
       containers:
         - name: code-agent
-          image: "docker.io/predator-analytics/backend:auto-1761855398"
+          image: "docker.io/predator-analytics/backend:auto-1761855083"
           command: ["python", "-m", "agents.code_agent"]
           env:
             - name: AGENT_TYPE
@@ -2163,7 +2163,7 @@ spec:
       serviceAccountName: predator-analytics-sa
       containers:
         - name: quick-agent
-          image: "docker.io/predator-analytics/backend:auto-1761855398"
+          image: "docker.io/predator-analytics/backend:auto-1761855083"
           command: ["python", "-m", "agents.quick_agent"]
           env:
             - name: AGENT_TYPE
@@ -2215,7 +2215,7 @@ spec:
       containers:
         - name: backend
           securityContext: null
-          image: "docker.io/predator-analytics/backend:auto-1761855398"
+          image: "docker.io/predator-analytics/backend:auto-1761855083"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -2313,7 +2313,7 @@ spec:
       containers:
         - name: frontend
           securityContext: null
-          image: "docker.io/predator-analytics/frontend:auto-1761855398"
+          image: "docker.io/predator-analytics/frontend:auto-1761855083"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
