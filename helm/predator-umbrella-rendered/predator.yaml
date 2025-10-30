@@ -91,7 +91,7 @@ spec:
     spec:
       containers:
         - name: agents
-          image: docker.io/your-docker-repo/predator-analytics/predator/agents:latest
+          image: docker.io/your-docker-repo/predator-analytics/predator/agents:quicktest-20251030
           imagePullPolicy: IfNotPresent
           args: ["--mode=worker"]
           resources:
@@ -120,7 +120,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: docker.io/your-docker-repo/predator-analytics/predator/api:latest
+          image: docker.io/your-docker-repo/predator-analytics/predator/api:quicktest-20251030
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
@@ -163,7 +163,7 @@ spec:
     spec:
       containers:
         - name: celery
-          image: docker.io/your-docker-repo/predator-analytics/predator/celery:latest
+          image: docker.io/your-docker-repo/predator-analytics/predator/celery:quicktest-20251030
           imagePullPolicy: IfNotPresent
           env:
           resources:
@@ -192,7 +192,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: docker.io/your-docker-repo/predator-analytics/predator/frontend:latest
+          image: docker.io/your-docker-repo/predator-analytics/predator/frontend:quicktest-20251030
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
@@ -235,7 +235,7 @@ spec:
     spec:
       containers:
         - name: model-router
-          image: docker.io/your-docker-repo/predator-analytics/predator/model-router:latest
+          image: docker.io/your-docker-repo/predator-analytics/predator/model-router:quicktest-20251030
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
