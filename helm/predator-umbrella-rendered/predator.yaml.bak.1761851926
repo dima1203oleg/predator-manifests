@@ -91,7 +91,7 @@ spec:
     spec:
       containers:
         - name: agents
-          image: docker.io/your-docker-repo/predator-analytics/predator/agents:auto-1761851925
+          image: docker.io/your-docker-repo/predator-analytics/predator/agents:auto-1761851590
           imagePullPolicy: IfNotPresent
           args: ["--mode=worker"]
           resources: {}
@@ -119,7 +119,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: docker.io/your-docker-repo/predator-analytics/predator/api:auto-1761851925
+          image: docker.io/your-docker-repo/predator-analytics/predator/api:auto-1761851590
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
@@ -161,7 +161,7 @@ spec:
     spec:
       containers:
         - name: celery
-          image: docker.io/your-docker-repo/predator-analytics/predator/celery:auto-1761851925
+          image: docker.io/your-docker-repo/predator-analytics/predator/celery:auto-1761851590
           imagePullPolicy: IfNotPresent
           env:
           resources: {}
@@ -189,7 +189,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: docker.io/your-docker-repo/predator-analytics/predator/frontend:auto-1761851925
+          image: docker.io/your-docker-repo/predator-analytics/predator/frontend:auto-1761851590
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
@@ -231,7 +231,7 @@ spec:
     spec:
       containers:
         - name: model-router
-          image: docker.io/your-docker-repo/predator-analytics/predator/model-router:auto-1761851925
+          image: docker.io/your-docker-repo/predator-analytics/predator/model-router:auto-1761851590
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
